@@ -1,0 +1,36 @@
+A ksh function which prints files with
+cat or less depending on the number of lines.
+Default: use cat if #lines <= 3/4 * $LINES
+
+Several files can be given as the last
+commandline arguments or one file can be
+specified in the variable s.
+Only one of both variants is used.
+Commandline arguments take precedence over $s.
+For example, both commands print the same file:
+  $ v ~/notes/openbsd
+  $ s=~/notes/openbsd v
+
+usage: s=file v [-dhnV] [-l lines]
+              v [-dhnV] [-l lines] file ...
+
+options:
+      -h          print this help
+      -d          decode quoted-printables
+      -l #lines   number of lines when to use less
+      -n          print line numbers
+      -V          prints version and exits
+
+
+Note:
+- For the -d option to work you also need the qpc [0] script or any other
+  tool which can decode Quoted-printables.
+- To use ksh functions the FPATH environment variable must be set to the
+  path the function resides in. The same path must als be set in the
+  PATH environment variable.
+  E.g.:
+  $ export PATH=$PATH:$HOME/bin/funcs
+  $ export FPATH=$FPATH:$HOME/bin/funcs
+
+
+[0] https://github.com/phildom/qpc
